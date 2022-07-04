@@ -20,7 +20,7 @@ return {
 	
 
 		-- singular items (which includes the boomarang for some reason)
-		--[0x648F] = {name="Scaling Up", kind="high"},
+		[0x648F] = {name="Scaling Up", kind="high"},
 		--[0x0421] = {name="Level Up", kind="high"},
 		--[0x03C0] = {name="Health Capacity Increased", kind="high"},
 		--[0x0709] = {name="Magic Capacity Increased", kind="high"},
@@ -108,7 +108,7 @@ return {
 					kind="bitOr"
 					},
 		[0x6481] = {
-					nameBitmap={"Flag2 Bit1", "Flag2 Bit2", "Windmill Start", "Flag2 Bit4", "Flag2 Bit5", "Prison Open with Key", "Flag2 Bit7", "Flag2 Bit8"},
+					nameBitmap={"Flag2 Bit1", "Flag2 Bit2", "Windmill Start", "Sun Statue Broke", "Flag2 Bit5", "Prison Open with Key", "Moon Statue Broke", "Flag2 Bit8"},
 					kind="bitOr"
 					},
 		[0x6482] = {
@@ -120,15 +120,15 @@ return {
 					kind="bitOr"
 					},
 		[0x6484] = {
-					nameBitmap={"Portoa Queen Location in Town", "Boat can be used", "Flag5 Bit3", "Flag5 Bit4", "Flag5 Bit5", "Flag5 Bit6", "Flag5 Bit7", "Flag5 Bit8"},
+					nameBitmap={"Portoa Queen Location in Town", "Boat can be used", "Flag5 Bit3", "Flag5 Bit4", "Flag5 Bit5", "Flag5 Bit6", "Flag5 Bit7", "Shyron Massecure"},
 					kind="bitOr"
 					},
 		[0x6485] = {
-					nameBitmap={"Change at Amazones and Talk to Queen in Girl Form", "Flag6 Bit2", "Swan Gate Flag?", "Change before Shyron", "Another Kensu Swan Flag and Change at Amazones", "Flag6 Bit6", "Flag6 Bit7", "Flag6 Bit8"},
+					nameBitmap={"Change at Amazones and Talk to Queen in Girl Form", "Flag6 Bit2", "Swan Gate Flag?", "Change before Shyron", "Another Kensu Swan Flag and Change at Amazones", "Flag6 Bit6", "Flute of Lime Statue People  Converstation 1", "Flag6 Bit8"},
 					kind="bitOr"
 					},
 		[0x6486] = {
-					nameBitmap={"Flag7 Bit1", "Flag7 Bit2", "Kensu Ivory Turnin", "Flag7 Bit4", "Flag7 Bit5", "Flag7 Bit6", "Flag7 Bit7", "Flag7 Bit8"},
+					nameBitmap={"Flag7 Bit1", "Flag7 Bit2", "Kensu Ivory Turnin", "Flag7 Bit4", "Waterfall Akahana Converstation", "Waterfall Akahana Converstation 2", "Flag7 Bit7", "Flag7 Bit8"},
 					kind="bitOr"
 					},
 		[0x6487] = {
@@ -144,15 +144,15 @@ return {
 					kind="bitOr"
 					},
 		[0x648A] = {
-					nameBitmap={"Akahana Statue Turnin", "Flag11 Bit2", "Flag11 Bit3", "Flag11 Bit4", "Flag11 Bit5", "Flag11 Bit6", "Flag11 Bit7", "Flag11 Bit8"},
+					nameBitmap={"Akahana Statue Turnin", "Flag11 Bit2", "Flag11 Bit3", "Flag11 Bit4", "Flute of Lime Statue People Despawn", "Zebu in Goa", "Tornel in Goa", "Asian Goa"},
 					kind="bitOr"
 					},
 		[0x648B] = {
-					nameBitmap={"Flag12 Bit1", "Flag12 Bit2", "Zebu Wall Break 1 of 3", "Sabre North Guard Area 1 of 2", "Zebu Wall Break 2 of 3", "Elder Converstation on Sabre", "Sabre North Guard Message 1", "Sabre North Guard Area 2 of 2"},
+					nameBitmap={"Mado 1 Spawn?", "Flag12 Bit2", "Zebu Wall Break 1 of 3", "Sabre North Guard Area 1 of 2", "Zebu Wall Break 2 of 3", "Elder Converstation on Sabre", "Sabre North Guard Message 1", "Sabre North Guard Area 2 of 2"},
 					kind="bitOr"
 					},
 		[0x648C] = {
-					nameBitmap={"Flag13 Bit1", "Stom in Swan Converstation", "Scared Townman Converstation", "Kensu Swan Pub 2 of 2", "Flag13 Bit5", "Flag13 Bit6", "Flag13 Bit7", "Flag13 Bit8"},
+					nameBitmap={"Flag13 Bit1", "Stom in Swan Converstation", "Scared Townman Converstation", "Kensu Swan Pub 2 of 2", "Flute of Lime Statue People 1", "Flag13 Bit6", "Flag13 Bit7", "Flag13 Bit8"},
 					kind="bitOr"
 					},
 		[0x648D] = {
@@ -160,14 +160,11 @@ return {
 					kind="bitOr"
 					},
 		[0x648E] = {
-					nameBitmap={"Kensu Swan Pub 1 of 2", "Kensu Flag Swan Dancehall", "Flag15 Bit3", "Flag15 Bit4", "Flag15 Bit5", "Flag15 Bit6", "Flag15 Bit7", "Flag15 Bit8"},
+					nameBitmap={"Kensu Swan Pub 1 of 2", "Kensu Flag Swan Dancehall", "Flag15 Bit3", "Flag15 Bit4", "Flag15 Bit5", "Flag15 Bit6", "Flag15 Bit7", "Flute of Lime Statue People 2"},
 					kind="bitOr"
 					},
 		-- Remove this is Scaling
-		[0x648F] = {
-					nameBitmap={"Leaf Elder Converstation and ?Kensu Hut?", "Wind Cave Entrance Message", "Flag16 Bit3 = Wind Upgrade? and Kensu Ivory", "Flag16 Bit4 = Shell Flute?, Jump River in Styx (Ivory Statue?)?", "Flag16 Bit5", "Flag16 Bit6", "Flag16 Bit7", "Flag16 Bit8"},
-					kind="bitOr"
-					},
+		--[0x648F] = {nameBitmap={"Leaf Elder Converstation and ?Kensu Hut?", "Wind Cave Entrance Message", "Flag16 Bit3 = Wind Upgrade? and Kensu Ivory", "Flag16 Bit4 = Shell Flute?, Jump River in Styx (Ivory Statue?)?", "Flag16 Bit5", "Flag16 Bit6", "Flag16 Bit7", "Flag16 Bit8"}, kind="bitOr"},
 
 		--Others flags 90 9F
 		[0x6490] = {
@@ -239,15 +236,15 @@ return {
 		--Chest/Item Locations
 
 		[0X64A0] = {
-					nameBitmap={"Leaf Elder Item", "Oak Elder Item", "Chest Spot1 Bit3", "Styx Left Side Chest 2", "Chest Spot1 Bit5", "Wind Cave Chest Bottom Right", "Tornado Braclet Chest", "Insect Boss Chest"},
+					nameBitmap={"Leaf Elder Item", "Oak Elder Item", "Waterfall Cave Chest Right Side", "Styx Left Side Chest 2", "Chest Spot1 Bit5", "Wind Cave Chest Bottom Right", "Tornado Braclet Chest", "Insect Boss Chest"},
 					kind="bitOr"
 					},
 		[0X64A1] = {
-					nameBitmap={"Kelby1 Chest", "Rage Item", "Amazones Chest Basement", "Chest Spot2 Bit4", "Chest Spot2 Bit5", "Chest Spot2 Bit6", "Chest Spot2 Bit7", "Chest Spot2 Bit8"},
+					nameBitmap={"Kelby1 Chest", "Rage Item", "Amazones Chest Basement", "Mado1 Chest", "Behind Karmine Chest", "Chest Spot2 Bit6", "Chest Spot2 Bit7", "Chest Spot2 Bit8"},
 					kind="bitOr"
 					},
 		[0X64A2] = {
-					nameBitmap={"Chest Spot3 Bit1", "Chest Spot3 Bit2", "Chest Spot3 Bit3", "Chest Spot3 Bit4", "Styx Right Side Chest 2", "Chest Spot3 Bit6", "Chest Spot3 Bit7", "Chest Spot3 Bit8"},
+					nameBitmap={"Waterfall Cave Chest Left Side", "Chest Spot3 Bit2", "Mado2 Chest", "Chest Spot3 Bit4", "Styx Right Side Chest 2", "Chest Spot3 Bit6", "Chest Spot3 Bit7", "Chest Spot3 Bit8"},
 					kind="bitOr"
 					},
 		[0X64A3] = {
@@ -255,7 +252,7 @@ return {
 					kind="bitOr"
 					},
 		[0X64A4] = {
-					nameBitmap={"Hydra Ledge Chest First One", "Sabera Castle Left Chest", "ESI Chest 1", "Chest Spot5 Bit4", "Wind Cave Middle Chest", "Item in Grass", "Chest Spot5 Bit7", "Oak Kid Item"},
+					nameBitmap={"Hydra Ledge Chest First One", "Sabera Castle Left Chest", "ESI Chest 1", "Sabera2 Chest", "Wind Cave Middle Chest", "Item in Grass", "Kelby2 Chest", "Oak Kid Item"},
 					kind="bitOr"
 					},
 		[0X64A5] = {
@@ -267,11 +264,11 @@ return {
 					kind="bitOr"
 					},
 		[0X64A7] = {
-					nameBitmap={"Sabera1 Chest", "Kensu Lighthouse Chest", "Gold Statue Item", "Waterway Item", "Karissa Plant Spot", "Chest Spot8 Bit6", "Queens Item in Amazones", "Hydra Summit Chest"},
+					nameBitmap={"Sabera1 Chest", "Kensu Lighthouse Chest", "Gold Statue Item", "Waterway Item", "Karissa Plant Spot", "Karmine Chest", "Queens Item in Amazones", "Hydra Summit Chest"},
 					kind="bitOr"
 					},
 		[0X64A8] = {
-					nameBitmap={"Aztec Item Pyrimid", "WindCave/Zebu Item", "Chest Spot9 Bit3", "Stom Fight Item", "Tornel's Item'", "Portoa Queen Item 2", "Calming Whirlpool Item", "Kensu Item Swan"},
+					nameBitmap={"Aztec Item Pyrimid", "WindCave/Zebu Item", "Paralysis Spot after Kelby", "Stom Fight Item", "Tornel's Item'", "Portoa Queen Item 2", "Calming Whirlpool Item", "Kensu Item Swan"},
 					kind="bitOr"
 					},
 		[0X64A9] = {
@@ -279,23 +276,23 @@ return {
 					kind="bitOr"
 					},
 		[0X64AA] = {
-					nameBitmap={"Wind Cave Bottom Left Chest", "Chest Spot11 Bit2", "Chest Spot11 Bit3", "Chest Spot11 Bit4", "Chest Spot11 Bit5", "Sabera Castle Right Chest", "Hydra Chest Left Side", "Styx Left Side Chest 1 Axeman"},
+					nameBitmap={"Wind Cave Bottom Left Chest", "Chest Spot11 Bit2", "Chest Spot11 Bit3", "Chest Spot11 Bit4", "Goa Lvl3 Right Side Top", "Sabera Castle Right Chest", "Hydra Chest Left Side", "Styx Left Side Chest 1 Axeman"},
 					kind="bitOr"
 					},
 		[0X64AB] = {
-					nameBitmap={"Goa Lvl4 Basement Chest BottomMiddle", "GBC Chest Right", "Oasis River Chest", "Chest Spot12 Bit4", "ESI Exit Chest", "Chest Spot12 Bit6", "Sabre North Chest Bottom", "Oasis Cave Chest"},
+					nameBitmap={"Goa Lvl4 Basement Chest BottomMiddle", "GBC Chest Right", "Oasis River Chest", "Chest Spot12 Bit4", "ESI Exit Chest", "Goa Lvl2 Middle Side Chest", "Sabre North Chest Bottom", "Oasis Cave Chest"},
 					kind="bitOr"
 					},
 		[0X64AC] = {
-					nameBitmap={"Chest Spot13 Bit1", "Vampire2 Chest", "Chest Spot13 Bit3", "Chest Spot13 Bit4", "Oasis Cave Chest Bottom", "Hydra Chest Right Side Gozen Ledge", "Chest Spot13 Bit7", "Kensu Hut Chest"},
+					nameBitmap={"Goa Lvl3 Left Side 2", "Vampire2 Chest", "Goa Lvl2 Left Side Chest", "Chest Spot13 Bit4", "Oasis Cave Chest Bottom", "Hydra Chest Right Side Gozen Ledge", "Goa Lvl2 Right Side Chest", "Kensu Hut Chest"},
 					kind="bitOr"
 					},
 		[0X64AD] = {
-					nameBitmap={"Chest Spot14 Bit1", "Chest by Tornel", "Sabre West Left Side Chest", "Chest Spot14 Bit4", "Pyrimid Chest", "Crypt Right Chest", "Goa Lvl4 Basement Chest BottomLeft", "Chest Spot14 Bit8"},
+					nameBitmap={"Chest Spot14 Bit1", "Chest by Tornel", "Sabre West Left Side Chest", "Goa Lvl3 Left Side 1", "Pyrimid Chest", "Crypt Right Chest", "Goa Lvl4 Basement Chest BottomLeft", "Goa Lvl3 Right Side Bottom"},
 					kind="bitOr"
 					},
 		[0X64AE] = {
-					nameBitmap={"Chest Spot15 Bit1", "Fog Lamp Cave Chest 3", "Chest Spot15 Bit3", "Chest Spot15 Bit4", "Hydra Chest Left 2", "Styx DropDown Chest", "Styx Right Side Chest 3", "Styx Right Side Chest 1"},
+					nameBitmap={"Fog Lamp Chest 2", "Fog Lamp Cave Chest 3", "Waterfall Cave Chest Entrance", "Chest Spot15 Bit4", "Hydra Chest Left 2", "Styx DropDown Chest", "Styx Right Side Chest 3", "Styx Right Side Chest 1"},
 					kind="bitOr"
 					},
 		[0X64AF] = {
@@ -303,6 +300,25 @@ return {
 					kind="bitOr"
 					},
 		
+		--Telepathy Talk? Not sure if the whole row needs to be synced
+		
+		[0X64C1] = {name="Converstation Flag1", kind="bitOr"},	
+		[0X64C2] = {name="Converstation Flag2", kind="bitOr"},	
+		[0X64C3] = {name="Converstation Flag3", kind="bitOr"},	
+		[0X64C4] = {name="Converstation Flag4", kind="bitOr"},	
+		[0X64C5] = {name="Converstation Flag5", kind="bitOr"},	
+		[0X64C6] = {name="Converstation Flag6", kind="bitOr"},	
+		[0X64C7] = {name="Converstation Flag7", kind="bitOr"},	
+		[0X64C8] = {name="Converstation Flag8", kind="bitOr"},	
+		[0X64C9] = {name="Converstation Flag9", kind="bitOr"},	
+		[0X64CA] = {name="Converstation Flag10", kind="bitOr"},			
+		[0X64CB] = {name="Converstation Flag11", kind="bitOr"},	
+		[0X64CC] = {name="Converstation Flag12", kind="bitOr"},	
+		[0X64CD] = {name="Converstation Flag13", kind="bitOr"},	
+		[0X64CE] = {name="Converstation Flag14", kind="bitOr"},	
+		[0X64CF] = {name="Converstation Flag15", kind="bitOr"},	
+
+					
 		--Walls/Crossings			
 					
 					[0X64D0] = {
@@ -342,11 +358,11 @@ return {
 					kind="bitOr"
 					},
 		[0X64D9] = {
-					nameBitmap={"Fog Lamp Cave Wall 3", "Fog Lamp Cave Wall 4", "Fog Lamp Cave Wall 5", "WallArea10 Bit4", "Fog Lamp Cave Wall 2", "Fog Lamp Cave Wall 1", "Rage WaterCrossing", "WallArea10 Bit8"},
+					nameBitmap={"Fog Lamp Cave Wall 3", "Fog Lamp Cave Wall 4", "Fog Lamp Cave Wall 5", "WallArea10 Bit4", "Fog Lamp Cave Wall 2", "Fog Lamp Cave Wall 1", "Rage WaterCrossing", "Waterfall Cave Wall"},
 					kind="bitOr"
 					},
 		[0X64DA] = {
-					nameBitmap={"WallArea11 Bit1", "WallArea11 Bit2", "WallArea11 Bit3", "WallArea11 Bit4", "WallArea11 Bit5", "WallArea11 Bit6", "WallArea11 Bit7", "Sabre Prison Wall at Kelby"},
+					nameBitmap={"Waterfall Cave Wall", "Waterfall Cave Wall", "Waterfall Cave Wall 1", "Waterfall Cave Wall 1", "WallArea11 Bit5", "WallArea11 Bit6", "WallArea11 Bit7", "Sabre Prison Wall at Kelby"},
 					kind="bitOr"
 					},
 		[0X64DB] = {
