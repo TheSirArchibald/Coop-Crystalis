@@ -3,7 +3,7 @@
 -- https://www.guidgenerator.com/online-guid-generator.aspx
 -- and put in a new GUID in the "guid" field.
 
--- Author: TheSirArchibald
+-- Author: TheSirarchibald
 -- Data source: https://datacrystal.romhacking.net/wiki/Crystalis:RAM_map
 -- This file is available under Creative Commons CC0
 
@@ -249,6 +249,11 @@ spec.sync[0x709] = {receiveTrigger=function (value, previousValue)
 
 -- Inventory space
 for i = 0x6430, 0x645f do
+	spec.sync[i] = {nameMap=itemNameMap}
+end
+
+-- Inventory Overflow space
+for i = 0x64B8, 0x64BF do
 	spec.sync[i] = {nameMap=itemNameMap}
 end
 
