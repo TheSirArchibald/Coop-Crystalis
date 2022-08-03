@@ -3,7 +3,7 @@
 -- https://www.guidgenerator.com/online-guid-generator.aspx
 -- and put in a new GUID in the "guid" field.
 
--- Author: TheSirArchibald
+-- Author: Chronogeran
 -- Data source: https://datacrystal.romhacking.net/wiki/Crystalis:RAM_map
 -- This file is available under Creative Commons CC0
 
@@ -263,7 +263,7 @@ end
 
 -- Conversations
 for i = 0x64C0, 0x64Cf do
-	spec.sync[i] = {kind="bitOr"} -- nameBitmap={}
+	spec.sync[i] = {kind="flags"} -- nameBitmap={}
 end
 
 -- Doors/walls/bridges
