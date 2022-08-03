@@ -3,7 +3,7 @@
 -- https://www.guidgenerator.com/online-guid-generator.aspx
 -- and put in a new GUID in the "guid" field.
 
--- Author: Chronogeran
+-- Author: TheSirArchibald
 -- Data source: https://datacrystal.romhacking.net/wiki/Crystalis:RAM_map
 -- This file is available under Creative Commons CC0
 
