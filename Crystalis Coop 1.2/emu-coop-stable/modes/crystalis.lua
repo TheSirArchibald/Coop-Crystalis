@@ -198,10 +198,10 @@ spec.sync[0x3c0] = {receiveTrigger=function (value, previousValue)
 }
 
 -- HP
-deltaWithVariableMax(0x3c1, 0x3c0, 0)
-spec.sync[0x3c1].receiveTrigger = function (value, previousValue)
+--deltaWithVariableMax(0x3c1, 0x3c0, 0)
+--spec.sync[0x3c1].receiveTrigger = function (value, previousValue)
 	--updateUIWithLife(value, memory.readbyte(0x3c0))
-end
+--end
 
 -- Level
 spec.sync[0x421] = {verb="gained", name="a level", 
@@ -236,10 +236,10 @@ spec.sync[0x706] = {size=2, receiveTrigger=function (value, previousValue)
 end}
 
 -- MP
-deltaWithVariableMax(0x708, 0x709, 0)
-spec.sync[0x708].receiveTrigger=function (value, previousValue)
+--deltaWithVariableMax(0x708, 0x709, 0)
+--spec.sync[0x708].receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2b, 0x77, 0x8c, 3, value)
-end
+--end
 
 -- Max MP
 spec.sync[0x709] = {receiveTrigger=function (value, previousValue)
@@ -260,15 +260,15 @@ end
 -- Events & chests
 -- Some events involve clearing flags, so bitOr isn't sufficient.
 for i = 0x6480, 0x64AF do
-	spec.sync[i] = {kind="flags"} -- nameBitmap={}
+	spec.sync[i] = {} -- nameBitmap={}
 end
 
 -- Change form is 6485 low 4 bits, don't sync that
 --spec.sync[0x6485] = {kind="bitOr", mask=0xf0}
 
--- Conversations
+-- Conversations	--Note 64C0 = 4F Story Mode
 for i = 0x64C0, 0x64Cf do
-	spec.sync[i] = {kind="flags"} -- nameBitmap={}
+	spec.sync[i] = {} -- nameBitmap={}
 end
 
 -- Doors/walls/bridges
@@ -284,7 +284,7 @@ spec.sync[0x64de] = {kind="bitOr", verb="visited", nameBitmap={
 	[8]="Nadare"
 }}
 spec.sync[0x64df] = {kind="bitOr", verb="visited", nameBitmap={
-	"Portoa", "Joel", "Amazones", "Zombie", "Swan", "Shyron", "Goa", "Sahara"
+	"Portoa", "Amazones", "Joel", "Zombie", "Swan", "Shyron", "Goa", "Sahara"
 }}
 
 -- Checkpoint for data synced above
@@ -294,6 +294,7 @@ spec.custom["checkpoint"] = function(payload)
 	for i = 1,0x08 do memory.writebyte(0x7d7f + i, payload[0x33 + i]) end
 	for i = 1,0x22 do memory.writebyte(0x7dff + i, payload[0x3b + i]) end
 	for i = 1,0x10 do memory.writebyte(0x7e4f + i, payload[0x4b + i]) end
+	for i = 1,0x10 do memory.writebyte(0x7e4f + i, payload[0x5b + i]) end
 end
 -- Watch for 6d00 because it copies the checkpoint there after writing it
 spec.sync[0x6d00] = {kind="trigger", writeTrigger=function(value, previousValue, forceSend)
@@ -302,7 +303,8 @@ spec.sync[0x6d00] = {kind="trigger", writeTrigger=function(value, previousValue,
 	for i = 1,0x03 do payload[0x30 + i] = memory.readbyte(0x7df4 + i) end -- Life and Level
 	for i = 1,0x08 do payload[0x33 + i] = memory.readbyte(0x7d7f + i) end -- Gold/exp/hp/mp
 	for i = 1,0x22 do payload[0x3b + i] = memory.readbyte(0x7dff + i) end -- event flags and chests
-	for i = 1,0x10 do payload[0x4b + i] = memory.readbyte(0x7e4f + i) end -- doors and teleport flags
+	for i = 1,0x10 do payload[0x4b + i] = memory.readbyte(0x7e3f + i) end -- event flags and chests
+	for i = 1,0x10 do payload[0x5b + i] = memory.readbyte(0x7e4f + i) end -- doors and teleport flags
 	send("checkpoint", payload)
 end}
 
