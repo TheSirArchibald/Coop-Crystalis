@@ -12,6 +12,10 @@ Known issues:
 * If you both get the same key item (e.g. magic spell), it will take up two slots in your inventory. Avoid this.
 --]]
 
+
+local HUD1 = 0x6220
+local HUD2 = 0x6221
+
 local spec = {
 	guid = "9f4d9002-51df-4a4e-966a-650adda6c3ad",
 	format = "1.2",
@@ -194,6 +198,10 @@ end
 -- Max HP
 spec.sync[0x3c0] = {receiveTrigger=function (value, previousValue)
 		--updateUIWithLife(memory.readbyte(0x3c1), value)
+		if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
 	end
 }
 
@@ -214,6 +222,9 @@ spec.sync[0x421] = {verb="gained", name="a level",
 			memory.writebyte(0x3e1, previousAttack + 1)
 			memory.writebyte(0x400, previousDefense1 + 1)
 			memory.writebyte(0x401, previousDefense2 + 1)
+			--UI Update Code
+			memory.writebyte(HUD2, 1)
+			memory.writebyte(HUD1, 1)			
 		end
 		-- Update UI
 		--updateUIWithNumber(0x2b, 0x39, 0x80, 2, value)
@@ -223,16 +234,29 @@ spec.sync[0x421] = {verb="gained", name="a level",
 -- Gold
 spec.sync[0x702] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2b, 0x59, 0x7b, 5, value)
+				
+				if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
 end}
 
 -- EXP
 spec.sync[0x704] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2b, 0x68, 0x82, 5, value)
+	if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
 end}
 
 -- Level Up EXP
 spec.sync[0x706] = {size=2, receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2b, 0x6e, 0x87, 5, value)
+	if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
 end}
 
 -- MP
@@ -244,6 +268,10 @@ end}
 -- Max MP
 spec.sync[0x709] = {receiveTrigger=function (value, previousValue)
 		--updateUIWithNumber(0x2b, 0x7b, 0x8f, 3, value)
+		if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
 	end
 }
 
