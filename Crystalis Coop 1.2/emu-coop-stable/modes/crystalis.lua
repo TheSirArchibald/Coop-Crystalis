@@ -36,18 +36,18 @@ local spec = {
 
 local itemNameMap = {
 	[0]="Sword of Wind",
-	"Sword of Fire",
-	"Sword of Water",
-	"Sword of Thunder",
-	"Crystalis",
-	"Ball of Wind",
-	"Tornado Bracelet",
-	"Ball of Fire",
-	"Flame Bracelet",
-	"Ball of Water",
-	"Blizzard Bracelet",
-	"Ball of Thunder",
-	"Storm Bracelet",
+	[1]="Sword of Fire",
+	[2]="Sword of Water",
+	[3]="Sword of Thunder",
+	[4]="Crystalis",
+	[5]="Ball of Wind",
+	[6]="Tornado Bracelet",
+	[7]="Ball of Fire",
+	[8]="Flame Bracelet",
+	[9]="Ball of Water",
+	[10]="Blizzard Bracelet",
+	[11]="Ball of Thunder",
+	[12]="Storm Bracelet",
 	[13]="Carapace Shield",
 	[14]="Bronze Shield",
 	[15]="Platinum Shield",
@@ -72,10 +72,8 @@ local itemNameMap = {
 	[34]="Magic Ring",
 	[35]="Fruit of Repun",
 	[36]="Warp Boots",
-	--[]="Opel Statue",
-
 	[37]="Statue of Onyx",
-	--[38] = Not Used
+	[38]="Opel Statue",
 	[39]="Insect Flute",
 	[40]="Flute of Lime",
 	[41]="Gas Mask",
@@ -86,6 +84,7 @@ local itemNameMap = {
 	[46]="Rabbit Boots",
 	[47]="Leather Boots",
 	[48]="Shield Ring",
+	[49]="Alarm Flute",
 	[50]="Windmill Key",
 	[51]="Key to Prison",
 	[52]="Key to Stxy",
@@ -331,7 +330,7 @@ spec.sync[0x6d00] = {kind="trigger", writeTrigger=function(value, previousValue,
 	for i = 1,0x03 do payload[0x30 + i] = memory.readbyte(0x7df4 + i) end -- Life and Level
 	for i = 1,0x08 do payload[0x33 + i] = memory.readbyte(0x7d7f + i) end -- Gold/exp/hp/mp
 	for i = 1,0x22 do payload[0x3b + i] = memory.readbyte(0x7dff + i) end -- event flags and chests
-	for i = 1,0x10 do payload[0x4b + i] = memory.readbyte(0x7e3f + i) end -- event flags and chests
+	for i = 1,0x10 do payload[0x4b + i] = memory.readbyte(0x7e3f + i) end -- conversations
 	for i = 1,0x10 do payload[0x5b + i] = memory.readbyte(0x7e4f + i) end -- doors and teleport flags
 	send("checkpoint", payload)
 end}
