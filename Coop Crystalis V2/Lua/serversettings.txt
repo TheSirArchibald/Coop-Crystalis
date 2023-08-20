@@ -1,0 +1,4 @@
+isServer=false
+server=10.0.0.10
+port=6000
+nickname=ARCH2
