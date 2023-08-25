@@ -208,6 +208,10 @@ spec.sync[0x03C0] = {receiveTrigger=function (value, previousValue)
 deltaWithVariableMax(0x03C1, 0x03C0, 0)
 spec.sync[0x03C1].receiveTrigger = function (value, previousValue)
 	--updateUIWithLife(value, memory.readbyte(0x03C0))
+	if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
 end
 
 	-- Level
@@ -262,6 +266,7 @@ end}
 deltaWithVariableMax(0x708, 0x709, 0)
 spec.sync[0x708].receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2B, 0x77, 0x8C, 3, value)
+
 end
 
 -- Max MP
