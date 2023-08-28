@@ -254,18 +254,22 @@ spec.sync[0x704] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTr
 end}
 
 -- Level Up EXP
-spec.sync[0x706] = {size=2, receiveTrigger=function (value, previousValue)
+--spec.sync[0x706] = {size=2, receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2B, 0x6E, 0x87, 5, value)
-	if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
-end}
+--	if (value ~= previousValue) then
+--					memory.writebyte(HUD2, 1)
+--					memory.writebyte(HUD1, 1)
+--				end
+--end}
 
 -- MP
 deltaWithVariableMax(0x708, 0x709, 0)
 spec.sync[0x708].receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2B, 0x77, 0x8C, 3, value)
+	if (value ~= previousValue) then
+		memory.writebyte(HUD2, 1)
+		memory.writebyte(HUD1, 1)
+		end
 
 end
 
