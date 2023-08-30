@@ -333,22 +333,22 @@ spec.sync[0x649C] = {}
 spec.sync[0x649D] = {}
 spec.sync[0x649E] = {}
 spec.sync[0x649F] = {}
-spec.sync[0x64A0] = {verb="action word ", nameBitmap={ "Oak Elder Item", "Waterfall Right Chest", "Styx Left Side Upper Chest", "Crystalis", "Wind Cave Chest Right BottomRight", "Sabre West Rabbit Chest", "Bug Chest", "Bug Chest"}}
-spec.sync[0x64A1] = {verb="action word ", nameBitmap={ "Rage Item", "Queen Basement Chest", "Mado 1 Chest", "Behind Karmine Chest", "64A1-6", "64A1-7", "64A1-8", "64A1-8"}}
-spec.sync[0x64A2] = {verb="action word ", nameBitmap={ "64A2-2", "Mado 2 Chest", "64A2-4", "Styx Right Side Chest 2", "64A2-6", "64A2-7", "64A2-8", "64A2-8"}}
-spec.sync[0x64A3] = {verb="action word ", nameBitmap={ "64A3-2", "64A3-3", "Oasis Island Chest", "Draygon 1 Chest", "Wind Cave Chest Left", "Wind Cave Chest Right Top", "Fog Lamp Chest 1", "Fog Lamp Chest 1"}}
-spec.sync[0x64A4] = {verb="action word ", nameBitmap={ "Sabera Fort Left Side Chest", "ESI Chest 1", "Sabera 2 Chest", "Wind Cave Chest Middle", "Cordell Grass Item", "Kelby 2 Chest", "Oak Mom Reward", "Oak Mom Reward"}}
-spec.sync[0x64A5] = {verb="action word ", nameBitmap={ "Akahana Item", "Oasis Iron Wall Chest", "Brokahana Item", "ESI River Left Side Chest", "Deo Item", "Vampire 1 Chest", "Oasis Chest Top Left", "Oasis Chest Top Left"}}
-spec.sync[0x64A6] = {verb="action word ", nameBitmap={ "Leaf Student Item", "Windmill Guard Item", "Sabre North Top Chest", "Zebu Sharon Item", "Fog Lamp Chest 4", "Dolphin Heal Item", "Clark Item", "Clark Item"}}
-spec.sync[0x64A7] = {verb="action word ", nameBitmap={ "Kensu Joel Chest", "Golden Statue Combined Item", "Waterway Item", "Karrissa Plant Item", "Karmine Chest", "Amazon Queen Item", "Hydra Top Chest (Flight)", "Hydra Top Chest (Flight)"}}
-spec.sync[0x64A8] = {verb="action word ", nameBitmap={ "Refresh Item", "Paralysis Spot Item", "Stom Fight Reward", "Tornel Bracelet Item", "Portoa Queen Item After Rage", "Calm the Sea Item", "Kensu Swan Item", "Kensu Swan Item"}}
-spec.sync[0x64A9] = {verb="action word ", nameBitmap={ "64A9-2", "64A9-3", "64A9-4", "64A9-5", "64A9-6", "64A9-7", "64A9-8", "64A9-8"}}
-spec.sync[0x64AA] = {verb="action word ", nameBitmap={ "64AA-2", "Sabre West Middle Chest", "Sabre North Middle Chest", "64AA-5", "Sabera Fort Chest Right", "Hydra Chest Upper Left", "Styx Axeman Chest", "Styx Axeman Chest"}}
-spec.sync[0x64AB] = {verb="action word ", nameBitmap={ "GBC Cave Right Chest", "Oasis River Chest", "64AB-4", "ESI Chest before Zombie", "Sabera 2 Middle Chest", "Sabre North Lower Chest", "Karissa Plant Cave Chest", "Karissa Plant Cave Chest"}}
-spec.sync[0x64AC] = {verb="action word ", nameBitmap={ "Vampire 2 Chest", "Sabera 2 Left Side Chest", "Mado 2 Floor Middle Chest", "Oasis Bottom Chest", "Hydra Chest Gozen Ledge", "Sabera 2 Right Chest", "64AC-8", "64AC-8"}}
-spec.sync[0x64AD] = {verb="action word ", nameBitmap={ "Sabre West Top Chest", "Sabre West Left Chest", "Mado Floor Iron Wall Chest", "Pyramid Chest", "Crypt Right Side", "Kamine Basement Chest Lower Left", "Mado 2 Floor Lower Right Chest", "Mado 2 Floor Lower Right Chest"}}
-spec.sync[0x64AE] = {verb="action word ", nameBitmap={ "Fog Lamp Chest 3", "Waterfall First Chest", "ESI River Chest Right", "Hydra Chest Top before flight", "64AE-6", "Styx Right Side Chest 3", "Styx Right Side Chest 1", "Styx Right Side Chest 1"}}
-spec.sync[0x64AF] = {verb="action word ", nameBitmap={ "Kamine Basement Chest Middle Top", "Kamine Basement Chest Upper Right", "Kamine Basement Chest Lower Right", "GBC Cave Left", "Styx Left Side Chest", "64AF-7", "64AF-8", "64AF-8"}}
+spec.sync[0x64A0] = {verb="collected", nameBitmap={ "Leaf Elder Item", "Oak Elder Item", "Waterfall Right Chest", "Styx Left Side Upper Chest", "Crystalis", "Wind Cave Chest Right BottomRight", "Sabre West Rabbit Chest", "Bug Chest", ""}}
+spec.sync[0x64A1] = {verb="collected", nameBitmap={ "Kelby 1 Chest", "Rage Item", "Queen Basement Chest", "Mado 1 Chest", "Behind Karmine Chest", "64A1-6", "64A1-7", "64A1-8", ""}}
+spec.sync[0x64A2] = {verb="collected", nameBitmap={ "Waterfall Left Side", "64A2-2", "Mado 2 Chest", "64A2-4", "Styx Right Side Chest 2", "64A2-6", "64A2-7", "64A2-8", ""}}
+spec.sync[0x64A3] = {verb="collected", nameBitmap={ "64A3-1", "64A3-2", "64A3-3", "Oasis Island Chest", "Draygon 1 Chest", "Wind Cave Chest Left", "Wind Cave Chest Right Top", "Fog Lamp Chest 1", ""}}
+spec.sync[0x64A4] = {verb="collected", nameBitmap={ "Hydra Chest Bottom", "Sabera Fort Left Side Chest", "ESI Chest 1", "Sabera 2 Chest", "Wind Cave Chest Middle", "Cordell Grass Item", "Kelby 2 Chest", "Oak Mom Reward", ""}}
+spec.sync[0x64A5] = {verb="collected", nameBitmap={ "Portoa Queen Item", "Akahana Item", "Oasis Iron Wall Chest", "Brokahana Item", "ESI River Left Side Chest", "Deo Item", "Vampire 1 Chest", "Oasis Chest Top Left", ""}}
+spec.sync[0x64A6] = {verb="collected", nameBitmap={ "Stone Akahana Item", "Leaf Student Item", "Windmill Guard Item", "Sabre North Top Chest", "Zebu Sharon Item", "Fog Lamp Chest 4", "Dolphin Heal Item", "Clark Item", ""}}
+spec.sync[0x64A7] = {verb="collected", nameBitmap={ "Sabera 1 Chest", "Kensu Joel Chest", "Golden Statue Combined Item", "Waterway Item", "Karrissa Plant Item", "Karmine Chest", "Amazon Queen Item", "Hydra Top Chest (Flight)", ""}}
+spec.sync[0x64A8] = {verb="collected", nameBitmap={ "Azteca Item after Draygon", "Refresh Item", "Paralysis Spot Item", "Stom Fight Reward", "Tornel Bracelet Item", "Portoa Queen Item After Rage", "Calm the Sea Item", "Kensu Swan Item", ""}}
+spec.sync[0x64A9] = {verb="collected", nameBitmap={ "Kensu Goa Item", "64A9-2", "64A9-3", "64A9-4", "64A9-5", "64A9-6", "64A9-7", "64A9-8", ""}}
+spec.sync[0x64AA] = {verb="collected", nameBitmap={ "Wind Cave Chest Right BottomLeft", "64AA-2", "Sabre West Middle Chest", "Sabre North Middle Chest", "64AA-5", "Sabera Fort Chest Right", "Hydra Chest Upper Left", "Styx Axeman Chest", ""}}
+spec.sync[0x64AB] = {verb="collected", nameBitmap={ "Karmine Basement Chest Lower Middle", "GBC Cave Right Chest", "Oasis River Chest", "64AB-4", "ESI Chest before Zombie", "Sabera 2 Middle Chest", "Sabre North Lower Chest", "Karissa Plant Cave Chest", ""}}
+spec.sync[0x64AC] = {verb="collected", nameBitmap={ "Mado 2 Floor Left Side Top Chest", "Vampire 2 Chest", "Sabera 2 Left Side Chest", "Mado 2 Floor Middle Chest", "Oasis Bottom Chest", "Hydra Chest Gozen Ledge", "Sabera 2 Right Chest", "64AC-8", ""}}
+spec.sync[0x64AD] = {verb="collected", nameBitmap={ "64AD-1", "Sabre West Top Chest", "Sabre West Left Chest", "Mado Floor Iron Wall Chest", "Pyramid Chest", "Crypt Right Side", "Kamine Basement Chest Lower Left", "Mado 2 Floor Lower Right Chest", ""}}
+spec.sync[0x64AE] = {verb="collected", nameBitmap={ "Fog Lamp Chest 2", "Fog Lamp Chest 3", "Waterfall First Chest", "ESI River Chest Right", "Hydra Chest Top before flight", "64AE-6", "Styx Right Side Chest 3", "Styx Right Side Chest 1", ""}}
+spec.sync[0x64AF] = {verb="collected", nameBitmap={ "Crypt Left Side Chest", "Kamine Basement Chest Middle Top", "Kamine Basement Chest Upper Right", "Kamine Basement Chest Lower Right", "GBC Cave Left", "Styx Left Side Chest", "64AF-7", "64AF-8", ""}}
 
 
 
