@@ -235,7 +235,16 @@ spec.sync[0x421] = {verb="gained", name="a level",
 }
 
 	-- Gold
-spec.sync[0x702] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
+spec.sync[0x702] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
+	--updateUIWithNumber(0x2B, 0x59, 0x7B, 5, value)
+				
+				if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
+end}
+	-- Gold2
+spec.sync[0x703] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2B, 0x59, 0x7B, 5, value)
 				
 				if (value ~= previousValue) then
@@ -245,7 +254,15 @@ spec.sync[0x702] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTr
 end}
 
 -- EXP
-spec.sync[0x704] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
+spec.sync[0x704] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
+	--updateUIWithNumber(0x2B, 0x68, 0x82, 5, value)
+	if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
+end}
+-- EXP2
+spec.sync[0x705] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2B, 0x68, 0x82, 5, value)
 	if (value ~= previousValue) then
 					memory.writebyte(HUD2, 1)
