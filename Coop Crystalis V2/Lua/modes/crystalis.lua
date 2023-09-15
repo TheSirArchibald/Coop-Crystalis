@@ -224,15 +224,6 @@ spec.sync[0x709] = {receiveTrigger=function (value, previousValue)
 	end
 }
 
---Scaling
-spec.sync[0x648F] = {receiveTrigger=function (value, previousValue)
-		if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
-	end
-}
-
 -- Inventory space
 for i = 0x6430, 0x645F do
 	spec.sync[i] = {nameMap=itemNameMap}
