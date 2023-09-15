@@ -140,6 +140,10 @@ spec.sync[0x03C0] = {receiveTrigger=function (value, previousValue)
 	end
 }
 
+	-- Condition (aka Posion, Paralysis, stone, nuber)
+--spec.sync[0x710] = {kind="bitOr", mask=0x05}
+	--spec.sync[0x6485] = {kind="bitOr", mask=0xf0}
+
 	-- HP
 deltaWithVariableMax(0x03C1, 0x03C0, 0)
 spec.sync[0x03C1].receiveTrigger = function (value, previousValue)
