@@ -3,7 +3,7 @@
 -- https://www.guidgenerator.com/online-guid-generator.aspx
 -- and put in a new GUID in the "guid" field.
 
--- Author: TheSirarchibald
+-- Author: Chronogeran and TheSirarchibald
 -- Data source: https://datacrystal.romhacking.net/wiki/Crystalis:RAM_map
 -- This file is available under Creative Commons CC0
 
@@ -131,73 +131,9 @@ local deltaWithVariableMax = function(address, deltaMaxAddress, deltaMin)
 	end}
 end
 
---updateUIWithNumber = function(addrHigh, addrLow, stringLoc, numDigits, val)
-	-- flag
-	--local specifierOffset = memory.readbyte(0x0b)
-	--local incrementedOffset = specifierOffset + 4
-	--if incrementedOffset == 0x20 then
-	--	incrementedOffset = 0
-	--end
-	--memory.writebyte(0x0b, incrementedOffset)
-	-- address
-	--memory.writebyte(0x6200 + specifierOffset, addrHigh)
-	--memory.writebyte(0x6201 + specifierOffset, addrLow)
-	-- num digits
-	--memory.writebyte(0x6202 + specifierOffset, numDigits)
-	-- string location
-	--memory.writebyte(0x6203 + specifierOffset, stringLoc)
-	-- digits
-	--local writeLoc = 0x6000 + stringLoc - 1
-	--for i=1,numDigits do
-	--	memory.writebyte(writeLoc + i, math.floor((val % 10^(numDigits - i + 1)) / 10^(numDigits - i)))
-	--end
---end
-
---updateUIWithLife = function(life, maxLife)
-	-- flag
-	--local specifierOffset = memory.readbyte(0x0b)
-	--local incrementedOffset = specifierOffset + 4
-	--if incrementedOffset == 0x20 then
-	--	incrementedOffset = 0
-	--end
-	--memory.writebyte(0x0b, incrementedOffset)
-	-- address
-	--memory.writebyte(0x6200 + specifierOffset, 0x2b)
-	--memory.writebyte(0x6201 + specifierOffset, 0x26)
-	-- num digits
-	--memory.writebyte(0x6202 + specifierOffset, 0x11)
-	-- string location
-	--memory.writebyte(0x6203 + specifierOffset, 0x60)
-	-- tiles
-	-- nothing: 0x20, right cap: 0x8d, empty: 0x8c, full: 0x88
-	-- fractional: 1 -> empty (8c), 2-5: 0x8b, 6-9: 0x8a, 10-13: 0x89, 14-16: full (0x88)
-	--local writeLoc = 0x605f
-	-- Each tile represents 16 HP
-	--local maxLifeSlot = math.floor((maxLife - 1) / 16) + 2
-	--local tilesOfLife = math.floor(life / 16)
-	--for i=1,17 do
-	--	local tile = 0x20
-	--	if maxLifeSlot == i then tile = 0x8d -- end cap
-	--	elseif maxLifeSlot < i then tile = 0x20 -- blank
-	--	elseif tilesOfLife >= i then tile = 0x88 -- full
-	--	elseif tilesOfLife == i - 1 then -- fractional tile
-	--		local fractionalAmount = life % 16
-	--		if fractionalAmount <= 1 then tile = 0x8c
-	--		elseif fractionalAmount <= 5 then tile = 0x8b
-	--		elseif fractionalAmount <= 9 then tile = 0x8a
-	--		elseif fractionalAmount <= 13 then tile = 0x89
-	--		else tile = 0x88
-	--		end
-	--	else tile = 0x8c -- empty
-	--	end
-	--	memory.writebyte(writeLoc + i, tile)
-	--end
---end
-
 	-- Max HP
 spec.sync[0x03C0] = {receiveTrigger=function (value, previousValue)
-		--updateUIWithLife(memory.readbyte(0x03C1), value)
-		if (value ~= previousValue) then
+			if (value ~= previousValue) then
 					memory.writebyte(HUD2, 1)
 					memory.writebyte(HUD1, 1)
 				end
@@ -207,7 +143,6 @@ spec.sync[0x03C0] = {receiveTrigger=function (value, previousValue)
 	-- HP
 deltaWithVariableMax(0x03C1, 0x03C0, 0)
 spec.sync[0x03C1].receiveTrigger = function (value, previousValue)
-	--updateUIWithLife(value, memory.readbyte(0x03C0))
 	if (value ~= previousValue) then
 					memory.writebyte(HUD2, 1)
 					memory.writebyte(HUD1, 1)
@@ -229,39 +164,35 @@ spec.sync[0x421] = {verb="gained", name="a level",
 			memory.writebyte(HUD2, 1)
 			memory.writebyte(HUD1, 1)			
 		end
-		-- Update UI
-		--updateUIWithNumber(0x2B, 0x39, 0x80, 2, value)
 	end
 }
 
-	-- Gold
+	-- Gold byte 1
 spec.sync[0x702] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
-	--updateUIWithNumber(0x2B, 0x59, 0x7B, 5, value)
-				
-				if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
+		if (value ~= previousValue) then
+				memory.writebyte(HUD2, 1)
+				memory.writebyte(HUD1, 1)
 				end
-end}
-	-- Gold2
+		end
+}
+	-- Gold byte2
 spec.sync[0x703] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
-	--updateUIWithNumber(0x2B, 0x59, 0x7B, 5, value)
-				
-				if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
+		if (value ~= previousValue) then
+				memory.writebyte(HUD2, 1)
+				memory.writebyte(HUD1, 1)
 				end
-end}
+		end
+}
 
--- EXP
+-- EXP byte1
 spec.sync[0x704] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
-	--updateUIWithNumber(0x2B, 0x68, 0x82, 5, value)
 	if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
+				memory.writebyte(HUD2, 1)
+				memory.writebyte(HUD1, 1)
 				end
-end}
--- EXP2
+		end
+}
+-- EXP byte2
 spec.sync[0x705] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
 	--updateUIWithNumber(0x2B, 0x68, 0x82, 5, value)
 	if (value ~= previousValue) then
@@ -270,19 +201,9 @@ spec.sync[0x705] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrig
 				end
 end}
 
--- Level Up EXP
---spec.sync[0x706] = {size=2, receiveTrigger=function (value, previousValue)
-	--updateUIWithNumber(0x2B, 0x6E, 0x87, 5, value)
---	if (value ~= previousValue) then
---					memory.writebyte(HUD2, 1)
---					memory.writebyte(HUD1, 1)
---				end
---end}
-
 -- MP
 deltaWithVariableMax(0x708, 0x709, 0)
 spec.sync[0x708].receiveTrigger=function (value, previousValue)
-	--updateUIWithNumber(0x2B, 0x77, 0x8C, 3, value)
 	if (value ~= previousValue) then
 		memory.writebyte(HUD2, 1)
 		memory.writebyte(HUD1, 1)
@@ -292,7 +213,6 @@ end
 
 -- Max MP
 spec.sync[0x709] = {receiveTrigger=function (value, previousValue)
-		--updateUIWithNumber(0x2B, 0x7B, 0x8F, 3, value)
 		if (value ~= previousValue) then
 					memory.writebyte(HUD2, 1)
 					memory.writebyte(HUD1, 1)
@@ -342,7 +262,15 @@ spec.sync[0x648B] = {}
 spec.sync[0x648C] = {}
 spec.sync[0x648D] = {}
 spec.sync[0x648E] = {}
---spec.sync[0x648F] = {}  --Scaling needs UI update
+
+--Scaling
+spec.sync[0x648F] = {receiveTrigger=function (value, previousValue)
+		if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
+	end}
+
 spec.sync[0x6490] = {}
 spec.sync[0x6491] = {}
 spec.sync[0x6492] = {}
