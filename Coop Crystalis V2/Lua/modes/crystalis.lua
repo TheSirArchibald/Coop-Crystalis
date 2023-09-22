@@ -255,7 +255,7 @@ spec.sync[0x6489] = {}
 spec.sync[0x648A] = {}
 spec.sync[0x648B] = {}
 spec.sync[0x648C] = {}
-spec.sync[0x648D] = {}
+spec.sync[0x648D] = {kind="bitOr", mask=0xBF}  --Update to remove 7th bit aka 40 for riding dolphin.
 spec.sync[0x648E] = {}
 
 --Scaling
