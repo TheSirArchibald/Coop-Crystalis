@@ -144,14 +144,17 @@ spec.sync[0x03C0] = {receiveTrigger=function (value, previousValue)
 --spec.sync[0x710] = {kind="bitOr", mask=0x05}
 	--spec.sync[0x6485] = {kind="bitOr", mask=0xf0}
 
+
+
 	-- HP
-deltaWithVariableMax(0x03C1, 0x03C0, 0)
-spec.sync[0x03C1].receiveTrigger = function (value, previousValue)
-	if (value ~= previousValue) then
+
+spec.sync[0x03C1] = {receiveTrigger=function (value, previousValue)
+			if (value ~= previousValue) then
 					memory.writebyte(HUD2, 1)
 					memory.writebyte(HUD1, 1)
 				end
-end
+	end
+}
 
 	-- Level
 spec.sync[0x421] = {verb="gained", name="a level", 
@@ -172,48 +175,48 @@ spec.sync[0x421] = {verb="gained", name="a level",
 }
 
 	-- Gold byte 1
-spec.sync[0x702] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
-		if (value ~= previousValue) then
-				memory.writebyte(HUD2, 1)
-				memory.writebyte(HUD1, 1)
-				end
-		end
-}
-	-- Gold byte2
-spec.sync[0x703] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
-		if (value ~= previousValue) then
-				memory.writebyte(HUD2, 1)
-				memory.writebyte(HUD1, 1)
-				end
-		end
-}
-
--- EXP byte1
-spec.sync[0x704] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
-	if (value ~= previousValue) then
-				memory.writebyte(HUD2, 1)
-				memory.writebyte(HUD1, 1)
-				end
-		end
-}
--- EXP byte2
-spec.sync[0x705] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
-	--updateUIWithNumber(0x2B, 0x68, 0x82, 5, value)
-	if (value ~= previousValue) then
+spec.sync[0x0702] = {receiveTrigger=function (value, previousValue)
+			if (value ~= previousValue) then
 					memory.writebyte(HUD2, 1)
 					memory.writebyte(HUD1, 1)
 				end
-end}
+	end
+}
+	-- Gold byte2
+spec.sync[0x0703] = {receiveTrigger=function (value, previousValue)
+			if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
+	end
+}
+
+-- EXP byte1
+spec.sync[0x0704] = {receiveTrigger=function (value, previousValue)
+			if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
+	end
+}
+-- EXP byte2
+spec.sync[0x0705] = {receiveTrigger=function (value, previousValue)
+			if (value ~= previousValue) then
+					memory.writebyte(HUD2, 1)
+					memory.writebyte(HUD1, 1)
+				end
+	end
+}
 
 -- MP
-deltaWithVariableMax(0x708, 0x709, 0)
-spec.sync[0x708].receiveTrigger=function (value, previousValue)
+spec.sync[0x708]= {receiveTrigger=function (value, previousValue)
 	if (value ~= previousValue) then
 		memory.writebyte(HUD2, 1)
 		memory.writebyte(HUD1, 1)
 		end
 
 end
+}
 
 -- Max MP
 spec.sync[0x709] = {receiveTrigger=function (value, previousValue)
