@@ -179,15 +179,13 @@ updateUIWithLife = function(life, maxLife)
 end
 
 updateUIWithNumber = function(addrLoc, numDigits, val)
-	-- flag
-	
+	-- PPU Locations	
 	-- 2B3A 2B3B 2B3C 2B3D 2B3E Gold
 	-- 2B77 2B78 2B79 MP
 	-- 2B7B 2B7C 2B7D Max MP
 	-- 2B5A - 2B5E EXP
 	-- 2b56 2b57 Scaling
 	-- 2b36 2b37 LVL
-
 	local writeLoc = 0x2b2e + addrLoc
 	for i=1,numDigits do
 		memory.writebyte(writeLoc + i, math.floor((val % 10^(numDigits - i + 1)) / 10^(numDigits - i)),"PPU Bus")
@@ -208,19 +206,13 @@ spec.sync[0x421] = {verb="gained", name="a level",
 			memory.writebyte(0x401, previousDefense2 + 1)
 			--UI Update Code
 			updateUIWithNumber(0x07, 2, value)
-			--memory.writebyte(HUD2, 1)
-			--memory.writebyte(HUD1, 1)			
-		end
+			end
 	end
 }
 
 	-- Gold byte 1
 spec.sync[0x702] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
 		updateUIWithNumber(0x0b, 5, value)
-		--if (value ~= previousValue) then
-		--		memory.writebyte(HUD2, 1)
-		--		memory.writebyte(HUD1, 1)
-		--		end
 		end
 }
 	-- Gold byte2
@@ -235,11 +227,7 @@ spec.sync[0x702] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTr
 -- EXP byte1
 spec.sync[0x704] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
 	updateUIWithNumber(0x2b, 5, value)
-	--if (value ~= previousValue) then
-	--			memory.writebyte(HUD2, 1)
-	--			memory.writebyte(HUD1, 1)
-	--			end
-		end
+	end
 }
 -- EXP byte2
 --spec.sync[0x705] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
@@ -263,11 +251,7 @@ end
 
 -- Max MP
 spec.sync[0x709] = {receiveTrigger=function (value, previousValue)
-		--if (value ~= previousValue) then
-		--			memory.writebyte(HUD2, 1)
-		--			memory.writebyte(HUD1, 1)
 		updateUIWithNumber(0x4C, 3, value)
-		
 	end
 }
 
@@ -307,10 +291,6 @@ spec.sync[0x648E] = {}
 
 --Scaling
 spec.sync[0x648F] = {receiveTrigger=function (value, previousValue)
-		--if (value ~= previousValue) then
-		--			memory.writebyte(HUD2, 1)
-		--			memory.writebyte(HUD1, 1)
-		--		end
 		updateUIWithNumber(0x27, 2, value)
 	end}
 
