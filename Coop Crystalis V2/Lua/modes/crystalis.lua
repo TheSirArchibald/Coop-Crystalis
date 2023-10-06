@@ -140,21 +140,60 @@ spec.sync[0x03C0] = {receiveTrigger=function (value, previousValue)
 	end
 }
 
-	-- Condition (aka Posion, Paralysis, stone, nuber)
+	-- Condition (aka Posion, Paralysis, stone, nuber)         TBD by everyone
 --spec.sync[0x710] = {kind="bitOr", mask=0x05}
 	--spec.sync[0x6485] = {kind="bitOr", mask=0xf0}
 
-
-
-	-- HP
-
-spec.sync[0x03C1] = {receiveTrigger=function (value, previousValue)
-			if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
+	--HP
+spec.sync[0x3c1] = {receiveTrigger=function (value, previousValue)
+		updateUIWithLife(value, memory.readbyte(0x3c0))
 	end
 }
+
+	--UI Health Update Change to go into PPU instead of VRAM
+updateUIWithLife = function(life, maxLife)
+	-- tiles
+	-- nothing: 0x20, right cap: 0x8d, empty: 0x8c, full: 0x88
+	-- fractional: 1 -> empty (8c), 2-5: 0x8b, 6-9: 0x8a, 10-13: 0x89, 14-16: full (0x88)
+	local writeLoc = 0x2b22
+	-- Each tile represents 16 HP
+	local maxLifeSlot = math.floor((maxLife - 1) / 16) + 2
+	local tilesOfLife = math.floor(life / 16)
+	for i=1,17 do
+		local tile = 0x20
+		if maxLifeSlot == i then tile = 0x8d -- end cap
+		elseif maxLifeSlot < i then tile = 0x20 -- blank
+		elseif tilesOfLife >= i then tile = 0x88 -- full
+		elseif tilesOfLife == i - 1 then -- fractional tile
+			local fractionalAmount = life % 16
+			if fractionalAmount <= 1 then tile = 0x8c
+			elseif fractionalAmount <= 5 then tile = 0x8b
+			elseif fractionalAmount <= 9 then tile = 0x8a
+			elseif fractionalAmount <= 13 then tile = 0x89
+			else tile = 0x88
+			end
+		else tile = 0x8c -- empty
+		end
+		memory.writebyte(writeLoc + i, tile, "PPU Bus")
+	end
+end
+
+updateUIWithNumber = function(addrLoc, numDigits, val)
+	-- flag
+	
+	-- 2B3A 2B3B 2B3C 2B3D 2B3E Gold
+	-- 2B77 2B78 2B79 MP
+	-- 2B7B 2B7C 2B7D Max MP
+	-- 2B5A - 2B5E EXP
+	-- 2b56 2b57 Scaling
+	-- 2b36 2b37 LVL
+
+	local writeLoc = 0x2b2e + addrLoc
+	for i=1,numDigits do
+		memory.writebyte(writeLoc + i, math.floor((val % 10^(numDigits - i + 1)) / 10^(numDigits - i)),"PPU Bus")
+	end
+end
+
 
 	-- Level
 spec.sync[0x421] = {verb="gained", name="a level", 
@@ -168,62 +207,67 @@ spec.sync[0x421] = {verb="gained", name="a level",
 			memory.writebyte(0x400, previousDefense1 + 1)
 			memory.writebyte(0x401, previousDefense2 + 1)
 			--UI Update Code
-			memory.writebyte(HUD2, 1)
-			memory.writebyte(HUD1, 1)			
+			updateUIWithNumber(0x07, 2, value)
+			--memory.writebyte(HUD2, 1)
+			--memory.writebyte(HUD1, 1)			
 		end
 	end
 }
 
 	-- Gold byte 1
-spec.sync[0x0702] = {receiveTrigger=function (value, previousValue)
-			if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
-	end
+spec.sync[0x702] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
+		updateUIWithNumber(0x0b, 5, value)
+		--if (value ~= previousValue) then
+		--		memory.writebyte(HUD2, 1)
+		--		memory.writebyte(HUD1, 1)
+		--		end
+		end
 }
 	-- Gold byte2
-spec.sync[0x0703] = {receiveTrigger=function (value, previousValue)
-			if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
-	end
-}
+--spec.sync[0x703] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
+--		if (value ~= previousValue) then
+--				memory.writebyte(HUD2, 1)
+--				memory.writebyte(HUD1, 1)
+--				end
+--		end
+--}
 
 -- EXP byte1
-spec.sync[0x0704] = {receiveTrigger=function (value, previousValue)
-			if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
-	end
+spec.sync[0x704] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
+	updateUIWithNumber(0x2b, 5, value)
+	--if (value ~= previousValue) then
+	--			memory.writebyte(HUD2, 1)
+	--			memory.writebyte(HUD1, 1)
+	--			end
+		end
 }
 -- EXP byte2
-spec.sync[0x0705] = {receiveTrigger=function (value, previousValue)
-			if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
-	end
-}
+--spec.sync[0x705] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
+	--updateUIWithNumber(0x2B, 0x68, 0x82, 5, value)
+--	if (value ~= previousValue) then
+--					memory.writebyte(HUD2, 1)
+--					memory.writebyte(HUD1, 1)
+--				end
+--end}
 
 -- MP
-spec.sync[0x708]= {receiveTrigger=function (value, previousValue)
-	if (value ~= previousValue) then
-		memory.writebyte(HUD2, 1)
-		memory.writebyte(HUD1, 1)
-		end
+deltaWithVariableMax(0x708, 0x709, 1)
+spec.sync[0x708].receiveTrigger=function (value, previousValue)
+	--if (value ~= previousValue) then
+	--	memory.writebyte(HUD2, 1)
+	--	memory.writebyte(HUD1, 1)
+	updateUIWithNumber(0x48, 3, value)
+	
 
 end
-}
 
 -- Max MP
 spec.sync[0x709] = {receiveTrigger=function (value, previousValue)
-		if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
+		--if (value ~= previousValue) then
+		--			memory.writebyte(HUD2, 1)
+		--			memory.writebyte(HUD1, 1)
+		updateUIWithNumber(0x4C, 3, value)
+		
 	end
 }
 
@@ -263,10 +307,11 @@ spec.sync[0x648E] = {}
 
 --Scaling
 spec.sync[0x648F] = {receiveTrigger=function (value, previousValue)
-		if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
+		--if (value ~= previousValue) then
+		--			memory.writebyte(HUD2, 1)
+		--			memory.writebyte(HUD1, 1)
+		--		end
+		updateUIWithNumber(0x27, 2, value)
 	end}
 
 spec.sync[0x6490] = {}
