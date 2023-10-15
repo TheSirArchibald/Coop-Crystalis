@@ -132,11 +132,8 @@ local deltaWithVariableMax = function(address, deltaMaxAddress, deltaMin)
 end
 
 	-- Max HP
-spec.sync[0x03C0] = {receiveTrigger=function (value, previousValue)
-			if (value ~= previousValue) then
-					memory.writebyte(HUD2, 1)
-					memory.writebyte(HUD1, 1)
-				end
+spec.sync[0x3c0] = {receiveTrigger=function (value, previousValue)
+		updateUIWithLife(memory.readbyte(0x3c1), value)
 	end
 }
 
@@ -210,43 +207,23 @@ spec.sync[0x421] = {verb="gained", name="a level",
 	end
 }
 
-	-- Gold byte 1
-spec.sync[0x702] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
+	-- Gold 
+spec.sync[0x702] = {size = 2, receiveTrigger=function (value, previousValue)
 		updateUIWithNumber(0x0b, 5, value)
 		end
 }
-	-- Gold byte2
---spec.sync[0x703] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
---		if (value ~= previousValue) then
---				memory.writebyte(HUD2, 1)
---				memory.writebyte(HUD1, 1)
---				end
---		end
---}
 
 -- EXP byte1
-spec.sync[0x704] = {size=2, kind="delta", deltaMin=0, deltaMax=0xffff, receiveTrigger=function (value, previousValue)
+spec.sync[0x704] = {size = 2, receiveTrigger=function (value, previousValue)
 	updateUIWithNumber(0x2b, 5, value)
 	end
 }
--- EXP byte2
---spec.sync[0x705] = {size=1, kind="delta", deltaMin=0, deltaMax=0xff, receiveTrigger=function (value, previousValue)
-	--updateUIWithNumber(0x2B, 0x68, 0x82, 5, value)
---	if (value ~= previousValue) then
---					memory.writebyte(HUD2, 1)
---					memory.writebyte(HUD1, 1)
---				end
---end}
 
 -- MP
 deltaWithVariableMax(0x708, 0x709, 1)
 spec.sync[0x708].receiveTrigger=function (value, previousValue)
-	--if (value ~= previousValue) then
-	--	memory.writebyte(HUD2, 1)
-	--	memory.writebyte(HUD1, 1)
 	updateUIWithNumber(0x48, 3, value)
 	
-
 end
 
 -- Max MP
