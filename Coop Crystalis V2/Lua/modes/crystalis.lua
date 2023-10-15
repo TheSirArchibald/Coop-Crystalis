@@ -305,7 +305,7 @@ spec.sync[0x64AE] = {verb="collected", nameBitmap={ "Fog Lamp Chest 2", "Fog Lam
 spec.sync[0x64AF] = {verb="collected", nameBitmap={ "Crypt Left Side Chest", "Kamine Basement Chest Middle Top", "Kamine Basement Chest Upper Right", "Kamine Basement Chest Lower Right", "GBC Cave Left", "Styx Left Side Chest", "64AF-7", "64AF-8", ""}}
 
 -- Change form is 6485 low 4 bits, don't sync that
-spec.sync[0x6485] = {kind="bitOr", mask=0xf0}
+spec.sync[0x6485] = {kind="bitOr", mask=0x80} --80 f0?
 
 -- Conversations	--Note 64C0 = 4F Story Mode
 for i = 0x64C0, 0x64CF do
@@ -333,17 +333,19 @@ spec.custom["checkpoint2"] = function(payload)
 	for i = 1,0x30 do memory.writebyte(0x7D2F + i, payload[i]) end
 	for i = 1,0x03 do memory.writebyte(0x7DF4 + i, payload[0x30 + i]) end
 	for i = 1,0x08 do memory.writebyte(0x7D7F + i, payload[0x33 + i]) end
-	for i = 1,0x10 do memory.writebyte(0x7E1F + i, payload[0x3B + i]) end
-	for i = 1,0x10 do memory.writebyte(0x7E3F + i, payload[0x4B + i]) end
-	for i = 1,0x10 do memory.writebyte(0x7E4F + i, payload[0x5B + i]) end
+	for i = 1,0x01 do memory.writebyte(0x7E04 + i, payload[0x3B + i]) end
+	for i = 1,0x10 do memory.writebyte(0x7E1F + i, payload[0x3C + i]) end
+	for i = 1,0x10 do memory.writebyte(0x7E3F + i, payload[0x4C + i]) end
+	for i = 1,0x10 do memory.writebyte(0x7E4F + i, payload[0x5C + i]) end
 end
 spec.custom["checkpoint"] = function(payload)
 	for i = 1,0x30 do memory.writebyte(0x6D2F + i, payload[i]) end
 	for i = 1,0x03 do memory.writebyte(0x6DF4 + i, payload[0x30 + i]) end
 	for i = 1,0x08 do memory.writebyte(0x6D7F + i, payload[0x33 + i]) end
-	for i = 1,0x10 do memory.writebyte(0x6E1F + i, payload[0x3B + i]) end
-	for i = 1,0x10 do memory.writebyte(0x6E3F + i, payload[0x4B + i]) end
-	for i = 1,0x10 do memory.writebyte(0x6E4F + i, payload[0x5B + i]) end
+	for i = 1,0x01 do memory.writebyte(0x6E04 + i, payload[0x3B + i]) end
+	for i = 1,0x10 do memory.writebyte(0x6E1F + i, payload[0x3C + i]) end
+	for i = 1,0x10 do memory.writebyte(0x6E3F + i, payload[0x4C + i]) end
+	for i = 1,0x10 do memory.writebyte(0x6E4F + i, payload[0x5C + i]) end
 end
 -- Watch for 6D00 because it copies the checkpoint there after writing it
 spec.sync[0x6D00] = {kind="trigger", writeTrigger=function(value, previousValue, forceSend)
@@ -351,12 +353,15 @@ spec.sync[0x6D00] = {kind="trigger", writeTrigger=function(value, previousValue,
 	for i = 1,0x30 do payload[0x00 + i] = memory.readbyte(0x7D2F + i) end -- Inventory
 	for i = 1,0x03 do payload[0x30 + i] = memory.readbyte(0x7DF4 + i) end -- Life and Level
 	for i = 1,0x08 do payload[0x33 + i] = memory.readbyte(0x7D7F + i) end -- Gold/exp/hp/mp
-	for i = 1,0x10 do payload[0x3B + i] = memory.readbyte(0x7E1F + i) end -- event flags and chests
-	for i = 1,0x10 do payload[0x4B+ i] = memory.readbyte(0x7E3F + i) end -- conversations
-	for i = 1,0x10 do payload[0x5B + i] = memory.readbyte(0x7E4F + i) end -- doors and teleport flags
+	for i = 1,0x01 do payload[0x3B + i] = memory.readbyte(0x7E04 + i) end -- Draygon2 Flag
+	for i = 1,0x10 do payload[0x3C + i] = memory.readbyte(0x7E1F + i) end -- event flags and chests
+	for i = 1,0x10 do payload[0x4C + i] = memory.readbyte(0x7E3F + i) end -- conversations
+	for i = 1,0x10 do payload[0x5C + i] = memory.readbyte(0x7E4F + i) end -- doors and teleport flags
 --
 	send("checkpoint", payload)
 	send("checkpoint2", payload)
 end}
 
 return spec
+
+--Note add 6e05 and 7e05 for Draygon2
