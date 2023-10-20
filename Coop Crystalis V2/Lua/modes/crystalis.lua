@@ -189,16 +189,15 @@ updateUIWithNumber = function(addrLoc, numDigits, val)
 	end
 end
 
-	-- Gold 
+	-- Gold
 spec.sync[0x702] = {size = 2, receiveTrigger=function (value, previousValue)
 		updateUIWithNumber(0x0b, 5, value)
 		end
 }
-
-
+	
 	--EXP1
 spec.sync[0x704] = {receiveTrigger=function (value, previousValue)
-			if value <= previousValue then
+			if value < previousValue then
 			local exptotal = memory.readword(0x0704)
 			updateUIWithNumber(0x2b, 5, exptotal- value)
 		end
@@ -207,15 +206,12 @@ spec.sync[0x704] = {receiveTrigger=function (value, previousValue)
 
 	--EXP2
 spec.sync[0x705] = {receiveTrigger=function (value, previousValue)
-			if value <= previousValue then
+			if value < previousValue then
 			local exptotal = memory.readword(0x0704)
 			updateUIWithNumber(0x2b, 5, exptotal - value)
 		end
 		end
 }
-
-
-
 
 -- EXP
 --spec.sync[0x704] = {receiveTrigger=function (exp1, previousValue)
