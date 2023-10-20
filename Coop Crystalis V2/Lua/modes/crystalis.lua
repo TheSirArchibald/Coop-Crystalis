@@ -184,11 +184,71 @@ updateUIWithNumber = function(addrLoc, numDigits, val)
 	-- 2b56 2b57 Scaling
 	-- 2b36 2b37 LVL
 	local writeLoc = 0x2b2e + addrLoc
-	for i=1,numDigits do
-		memory.writebyte(writeLoc + i, math.floor((val % 10^(numDigits - i + 1)) / 10^(numDigits - i)),"PPU Bus")
+		for i=1,numDigits do
+		memory.writebyte(writeLoc + i, math.floor((val % 10^(numDigits - i + 1)) / 10^(numDigits - i)),"PPU Bus")   --This is doing delta   
 	end
 end
 
+	-- Gold 
+spec.sync[0x702] = {size = 2, receiveTrigger=function (value, previousValue)
+		updateUIWithNumber(0x0b, 5, value)
+		end
+}
+
+
+	--EXP1
+spec.sync[0x704] = {receiveTrigger=function (value, previousValue)
+			if value <= previousValue then
+			local exptotal = memory.readword(0x0704)
+			updateUIWithNumber(0x2b, 5, exptotal- value)
+		end
+		end
+}
+
+	--EXP2
+spec.sync[0x705] = {receiveTrigger=function (value, previousValue)
+			if value <= previousValue then
+			local exptotal = memory.readword(0x0704)
+			updateUIWithNumber(0x2b, 5, exptotal - value)
+		end
+		end
+}
+
+
+
+
+-- EXP
+--spec.sync[0x704] = {receiveTrigger=function (exp1, previousValue)
+--			if exp1 ~= previousValue then
+--			memory.writebyte(HUD2, 1)
+--			memory.writebyte(HUD1, 1)
+--		end
+--		end}
+
+--spec.sync[0x705] = {receiveTrigger=function (exp2, previousValue)
+--			if exp2 ~= previousValue then
+--			memory.writebyte(HUD2, 1)
+--			memory.writebyte(HUD1, 1)
+--		end
+--		end}
+
+
+--Exp 
+--1 = 30
+--2 = 60
+--3 = 150
+--4 = 300
+--5 = 700
+--6 = 1200
+--7 = 1600
+--8 = 3500
+--9 = 5800
+--10 = 8000
+--11 = 10000
+--12 = 20000
+--13 = 30000
+--14 = 40000
+--15 = 50000
 
 	-- Level
 spec.sync[0x421] = {verb="gained", name="a level", 
@@ -198,6 +258,8 @@ spec.sync[0x421] = {verb="gained", name="a level",
 			local previousAttack = memory.readbyte(0x03E1)
 			local previousDefense1 = memory.readbyte(0x400)
 			local previousDefense2 = memory.readbyte(0x401)
+			
+			--local exp2 = memory.readbyte(0x705)
 			memory.writebyte(0x3E1, previousAttack + 1)
 			memory.writebyte(0x400, previousDefense1 + 1)
 			memory.writebyte(0x401, previousDefense2 + 1)
@@ -207,23 +269,10 @@ spec.sync[0x421] = {verb="gained", name="a level",
 	end
 }
 
-	-- Gold 
-spec.sync[0x702] = {size = 2, receiveTrigger=function (value, previousValue)
-		updateUIWithNumber(0x0b, 5, value)
-		end
-}
-
--- EXP byte1
-spec.sync[0x704] = {size = 2, receiveTrigger=function (value, previousValue)
-	updateUIWithNumber(0x2b, 5, value)
-	end
-}
-
 -- MP
 deltaWithVariableMax(0x708, 0x709, 1)
 spec.sync[0x708].receiveTrigger=function (value, previousValue)
 	updateUIWithNumber(0x48, 3, value)
-	
 end
 
 -- Max MP
@@ -363,5 +412,3 @@ spec.sync[0x6D00] = {kind="trigger", writeTrigger=function(value, previousValue,
 end}
 
 return spec
-
---Note add 6e05 and 7e05 for Draygon2
