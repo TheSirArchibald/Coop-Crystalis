@@ -189,44 +189,36 @@ updateUIWithNumber = function(addrLoc, numDigits, val)
 	end
 end
 
-	-- Gold
-spec.sync[0x702] = {size = 2, receiveTrigger=function (value, previousValue)
-		updateUIWithNumber(0x0b, 5, value)
+-- Gold
+spec.sync[0x702] = {receiveTrigger=function (value, previousValue)
+			if value ~= previousValue then
+			memory.writebyte(HUD2, 1)
+			memory.writebyte(HUD1, 1)
 		end
-}
-	
-	--EXP1
-spec.sync[0x704] = {receiveTrigger=function (value, previousValue)
-			if value < previousValue then
-			local exptotal = memory.readword(0x0704)
-			updateUIWithNumber(0x2b, 5, exptotal- value)
-		end
-		end
-}
+		end}
 
-	--EXP2
-spec.sync[0x705] = {receiveTrigger=function (value, previousValue)
-			if value < previousValue then
-			local exptotal = memory.readword(0x0704)
-			updateUIWithNumber(0x2b, 5, exptotal - value)
+spec.sync[0x703] = {receiveTrigger=function (value, previousValue)
+			if value ~= previousValue then
+			memory.writebyte(HUD2, 1)
+			memory.writebyte(HUD1, 1)
 		end
-		end
-}
+		end}
+	
 
 -- EXP
---spec.sync[0x704] = {receiveTrigger=function (exp1, previousValue)
---			if exp1 ~= previousValue then
---			memory.writebyte(HUD2, 1)
---			memory.writebyte(HUD1, 1)
---		end
---		end}
+spec.sync[0x704] = {receiveTrigger=function (value, previousValue)
+			if value ~= previousValue then
+			memory.writebyte(HUD2, 1)
+			memory.writebyte(HUD1, 1)
+		end
+		end}
 
---spec.sync[0x705] = {receiveTrigger=function (exp2, previousValue)
---			if exp2 ~= previousValue then
---			memory.writebyte(HUD2, 1)
---			memory.writebyte(HUD1, 1)
---		end
---		end}
+spec.sync[0x705] = {receiveTrigger=function (value, previousValue)
+			if value ~= previousValue then
+			memory.writebyte(HUD2, 1)
+			memory.writebyte(HUD1, 1)
+		end
+		end}
 
 
 --Exp 
