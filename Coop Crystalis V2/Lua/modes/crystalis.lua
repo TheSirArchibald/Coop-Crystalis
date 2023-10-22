@@ -190,35 +190,48 @@ updateUIWithNumber = function(addrLoc, numDigits, val)
 end
 
 -- Gold
+	-- Gold
 spec.sync[0x702] = {receiveTrigger=function (value, previousValue)
-			if value ~= previousValue then
-			memory.writebyte(HUD2, 1)
-			memory.writebyte(HUD1, 1)
+		if value >= previousValue then
+			local gold2 = memory.readbyte(0x0703)
+			updateUIWithNumber(0x0b, 5, value + (gold2 *256))
+		else 
+			local gold2  = memory.readbyte(0x0703)
+			updateUIWithNumber(0x0b, 5, value + (gold2 *256))
+			end
 		end
-		end}
+}
 
 spec.sync[0x703] = {receiveTrigger=function (value, previousValue)
-			if value ~= previousValue then
-			memory.writebyte(HUD2, 1)
-			memory.writebyte(HUD1, 1)
+		if value > previousValue then
+			local gold1 = memory.readbyte(0x0702)
+			updateUIWithNumber(0x0b, 5, gold1 +(value *256))
+		else
+			local gold1  = memory.readbyte(0x0702)
+			updateUIWithNumber(0x0b, 5, gold1 +(value *256))
 		end
-		end}
+		end
+}
 	
 
 -- EXP
+	--EXP1
 spec.sync[0x704] = {receiveTrigger=function (value, previousValue)
-			if value ~= previousValue then
-			memory.writebyte(HUD2, 1)
-			memory.writebyte(HUD1, 1)
+			if value < previousValue then
+			local exptotal = memory.readword(0x0704)
+			updateUIWithNumber(0x2b, 5, exptotal - value)
 		end
-		end}
+		end
+}
 
+	--EXP2
 spec.sync[0x705] = {receiveTrigger=function (value, previousValue)
-			if value ~= previousValue then
-			memory.writebyte(HUD2, 1)
-			memory.writebyte(HUD1, 1)
+			if value < previousValue then
+			local exptotal = memory.readword(0x0704)
+			updateUIWithNumber(0x2b, 5, exptotal - (value * 255))
 		end
-		end}
+		end
+}
 
 
 --Exp 
