@@ -282,12 +282,12 @@ spec.sync[0x709] = {receiveTrigger=function (value, previousValue)
 	end
 }
 
--- Inventory space
+-- Inventory space								0x30 Size for checkpoint dat
 for i = 0x6430, 0x645F do
 	spec.sync[i] = {nameMap=itemNameMap}
 end
 
--- Inventory Overflow space
+-- Inventory Overflow space   					0x10 Size for checkpoint data
 for i = 0x64B8, 0x64BF do
 	spec.sync[i] = {nameMap=itemNameMap}
 end
@@ -305,12 +305,14 @@ spec.sync[0x6481] = {}
 spec.sync[0x6482] = {}
 spec.sync[0x6483] = {}
 spec.sync[0x6484] = {}
-spec.sync[0x6485] = {}
+-- Change form is 6485 low 4 bits, don't sync that   --This is a change form flag and also include draygon 2 spawn
+spec.sync[0x6485] = {kind="bitOr", mask=0x80} --80 f0?
+
 spec.sync[0x6486] = {}
 spec.sync[0x6487] = {}
-spec.sync[0x6488] = {}
+spec.sync[0x6488] = {verb="Kid Returned"}
 spec.sync[0x6489] = {}
-spec.sync[0x648A] = {}
+spec.sync[0x648A] = {verb="collected", nameBitmap={ "648A-1", "648A-2", "Missing Kid Alert!", "Oak Kid Found", "648A-5", "64A2-6", "64A2-7", "64A2-8", ""}}
 spec.sync[0x648B] = {}
 spec.sync[0x648C] = {}
 spec.sync[0x648D] = {kind="bitOr", mask=0xBF}  --Update to remove 7th bit aka 40 for riding dolphin.
@@ -354,8 +356,7 @@ spec.sync[0x64AD] = {verb="collected", nameBitmap={ "64AD-1", "Sabre West Top Ch
 spec.sync[0x64AE] = {verb="collected", nameBitmap={ "Fog Lamp Chest 2", "Fog Lamp Chest 3", "Waterfall First Chest", "ESI River Chest Right", "Hydra Chest Top before flight", "64AE-6", "Styx Right Side Chest 3", "Styx Right Side Chest 1", ""}}
 spec.sync[0x64AF] = {verb="collected", nameBitmap={ "Crypt Left Side Chest", "Kamine Basement Chest Middle Top", "Kamine Basement Chest Upper Right", "Kamine Basement Chest Lower Right", "GBC Cave Left", "Styx Left Side Chest", "64AF-7", "64AF-8", ""}}
 
--- Change form is 6485 low 4 bits, don't sync that
-spec.sync[0x6485] = {kind="bitOr", mask=0x80} --80 f0?
+
 
 -- Conversations	--Note 64C0 = 4F Story Mode
 for i = 0x64C0, 0x64CF do
@@ -380,34 +381,33 @@ spec.sync[0x64DF] = {kind="bitOr", verb="visited", nameBitmap={
 
 -- Checkpoint for data synced above
 spec.custom["checkpoint2"] = function(payload)
-	for i = 1,0x30 do memory.writebyte(0x7D2F + i, payload[i]) end
-	for i = 1,0x03 do memory.writebyte(0x7DF4 + i, payload[0x30 + i]) end
-	for i = 1,0x08 do memory.writebyte(0x7D7F + i, payload[0x33 + i]) end
-	for i = 1,0x01 do memory.writebyte(0x7E04 + i, payload[0x3B + i]) end
-	for i = 1,0x10 do memory.writebyte(0x7E1F + i, payload[0x3C + i]) end
-	for i = 1,0x10 do memory.writebyte(0x7E3F + i, payload[0x4C + i]) end
-	for i = 1,0x10 do memory.writebyte(0x7E4F + i, payload[0x5C + i]) end
+	for i = 1,0x30 do memory.writebyte(0x7D2F + i, payload[i]) end			--Inventory
+	for i = 1,0x10 do memory.writebyte(0x7E37 + i, payload[0x30 + i]) end	-- Overflow
+	for i = 1,0x03 do memory.writebyte(0x7DF4 + i, payload[0x40 + i]) end 	--life level
+	for i = 1,0x08 do memory.writebyte(0x7D7F + i, payload[0x43 + i]) end	--gold/exp/hp/mp
+	for i = 1,0x30 do memory.writebyte(0x7DFF + i, payload[0x4B + i]) end	-- event flags and chests  	
+	for i = 1,0x10 do memory.writebyte(0x7E3F + i, payload[0x7B + i]) end	-- conversations	-correct 0x10
+	for i = 1,0x10 do memory.writebyte(0x7E4F + i, payload[0x8B + i]) end	-- doors and teleport flags - cORRECT 0X10
 end
 spec.custom["checkpoint"] = function(payload)
-	for i = 1,0x30 do memory.writebyte(0x6D2F + i, payload[i]) end
-	for i = 1,0x03 do memory.writebyte(0x6DF4 + i, payload[0x30 + i]) end
-	for i = 1,0x08 do memory.writebyte(0x6D7F + i, payload[0x33 + i]) end
-	for i = 1,0x01 do memory.writebyte(0x6E04 + i, payload[0x3B + i]) end
-	for i = 1,0x10 do memory.writebyte(0x6E1F + i, payload[0x3C + i]) end
-	for i = 1,0x10 do memory.writebyte(0x6E3F + i, payload[0x4C + i]) end
-	for i = 1,0x10 do memory.writebyte(0x6E4F + i, payload[0x5C + i]) end
+	for i = 1,0x30 do memory.writebyte(0x6D2F + i, payload[i]) end  		--Correct -- Inventory 0x30
+	for i = 1,0x10 do memory.writebyte(0x6E37 + i, payload[0x30 + i]) end  	--Correct -- Overflow Inventory 0x10
+	for i = 1,0x03 do memory.writebyte(0x6DF4 + i, payload[0x40 + i]) end	-- Life and Level  --Correct 0x03
+	for i = 1,0x08 do memory.writebyte(0x6D7F + i, payload[0x43 + i]) end 	-- Gold/exp/hp/mp  -- Correct 0x08
+	for i = 1,0x30 do memory.writebyte(0x6DFF + i, payload[0x4B + i]) end	-- event flags and chests  0X30
+	for i = 1,0x10 do memory.writebyte(0x6E3F + i, payload[0x7B + i]) end	-- conversations	-correct 0x10
+	for i = 1,0x10 do memory.writebyte(0x6E4F + i, payload[0x8B + i]) end	-- doors and teleport flags - cORRECT 0X10
 end
 -- Watch for 6D00 because it copies the checkpoint there after writing it
 spec.sync[0x6D00] = {kind="trigger", writeTrigger=function(value, previousValue, forceSend)
 	local payload = {}
-	for i = 1,0x30 do payload[0x00 + i] = memory.readbyte(0x7D2F + i) end -- Inventory
-	for i = 1,0x03 do payload[0x30 + i] = memory.readbyte(0x7DF4 + i) end -- Life and Level
-	for i = 1,0x08 do payload[0x33 + i] = memory.readbyte(0x7D7F + i) end -- Gold/exp/hp/mp
-	for i = 1,0x01 do payload[0x3B + i] = memory.readbyte(0x7E04 + i) end -- Draygon2 Flag
-	for i = 1,0x10 do payload[0x3C + i] = memory.readbyte(0x7E1F + i) end -- event flags and chests
-	for i = 1,0x10 do payload[0x4C + i] = memory.readbyte(0x7E3F + i) end -- conversations
-	for i = 1,0x10 do payload[0x5C + i] = memory.readbyte(0x7E4F + i) end -- doors and teleport flags
---
+	for i = 1,0x30 do payload[0x00 + i] = memory.readbyte(0x7D2F + i) end -- Inventory 0x30
+	for i = 1,0x10 do payload[0x30 + i] = memory.readbyte(0x7E37 + i) end -- Overflow Inventory 0x10
+	for i = 1,0x03 do payload[0x40 + i] = memory.readbyte(0x7DF4 + i) end -- Life and Level  --Correct 0x03
+	for i = 1,0x08 do payload[0x43 + i] = memory.readbyte(0x7D7F + i) end -- Gold/exp/hp/mp  -- Correct 0x08
+	for i = 1,0x30 do payload[0x4B + i] = memory.readbyte(0x7DFF + i) end -- event flags and chests  - Correct 0x30
+	for i = 1,0x10 do payload[0x7B + i] = memory.readbyte(0x7E3F + i) end -- conversations	-correct 0x10
+	for i = 1,0x10 do payload[0x8B + i] = memory.readbyte(0x7E4F + i) end -- doors and teleport flags - cORRECT 0X10
 	send("checkpoint", payload)
 	send("checkpoint2", payload)
 end}
