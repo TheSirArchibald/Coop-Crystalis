@@ -260,7 +260,11 @@ end
 
 function hal.validate_environment()
   --this deprecated call should be here, do not remove it
-  if (hal._luacore() == nil) or not (IS_BIZHAWK(2,8,1) or IS_BIZHAWK(2,9,2)) then
+
+if IS_BIZHAWK(2,8,1) then	---Special Support for the Crystalis Coop Version until I can figure out the core socket issue.
+	return true
+
+elseif (hal._luacore() == nil) or not (IS_BIZHAWK(2,8,1) or IS_BIZHAWK(2,9,2)) then
     print("Crowd Control requires BizHawk 2.9.1 or 2.9.2 to function.")
     print("You can download the correct version of BizHawk from:")
     print("        https://github.com/TASVideos/BizHawk/releases")
